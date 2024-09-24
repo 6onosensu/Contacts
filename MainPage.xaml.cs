@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Contacts
+﻿namespace Contacts
 {
     public partial class MainPage : ContentPage
     {
@@ -8,7 +6,7 @@ namespace Contacts
 
         public MainPage()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
     }

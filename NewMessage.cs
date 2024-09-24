@@ -1,5 +1,3 @@
-using System;
-
 namespace Contacts;
 
 public class NewMessage : ContentPage
