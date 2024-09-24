@@ -1,4 +1,6 @@
-﻿namespace Contacts
+﻿using System;
+
+namespace Contacts
 {
     public partial class MainPage : ContentPage
     {
