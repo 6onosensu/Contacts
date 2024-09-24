@@ -4,7 +4,7 @@ public class NewMessage : ContentPage
 {
     TableView table;
 	Button sendButton;
-	EntryCell phoneNumber, messageCell;
+	Entry phoneNumber, messageEntry;
     public NewMessage()
 	{
 		sendButton = new Button
@@ -19,39 +19,26 @@ public class NewMessage : ContentPage
 		};
         sendButton.Clicked += SendButton_Clicked;
 
-		phoneNumber = new EntryCell
+		phoneNumber = new Entry
 		{
-			Label = "Phone Number",
+			Text = "Phone Number",
 			Keyboard = Keyboard.Telephone,
 		};
-		messageCell = new EntryCell
+        messageEntry = new Entry
 		{
-			Label = "Message..",
+			Text = "Message..",
 			Keyboard = Keyboard.Default,
 		};
-        table = new TableView
-		{
-			Intent = TableIntent.Form,
-			Root = new TableRoot
-			{
-				new TableSection("To: ")
-				{
-					
-				},
-				new TableSection("Your message: ")
-				{
-					
-				}
-            },
-            
-        };
 		
 		Content = new VerticalStackLayout
 		{
 			Children = {
-				table, 
+				phoneNumber,
+				messageEntry,
 				sendButton,
 			},
+            Spacing = 10,
+            Padding = 10,
             BackgroundColor = Colors.WhiteSmoke,
             HorizontalOptions = LayoutOptions.EndAndExpand,
             VerticalOptions = LayoutOptions.EndAndExpand,
@@ -61,7 +48,7 @@ public class NewMessage : ContentPage
     private async void SendButton_Clicked(object? sender, EventArgs e)
     {
         string number = phoneNumber.Text;
-		string message = messageCell.Text;
+		string message = messageEntry.Text;
 		SmsMessage sms = new SmsMessage(message, number);
 		if (number != null && Sms.Default.IsComposeSupported)
 		{
