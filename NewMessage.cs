@@ -4,55 +4,69 @@ public class NewMessage : ContentPage
 {
     TableView table;
 	Button sendButton;
-	Entry phoneNumber, messageEntry;
+	EntryCell phoneNumber, messageEntry;
     public NewMessage()
 	{
-		sendButton = new Button
+		phoneNumber = new EntryCell
 		{
-			Text = "Send SMS",
-			BackgroundColor = Colors.White,
-			BorderColor = Colors.Black,
-			TextColor = Colors.Black,
-			BorderWidth = 1,
-			WidthRequest = 300,
-			HeightRequest = 70,
+            Placeholder = "Enter phone number",
+            Keyboard = Keyboard.Telephone,
 		};
+        messageEntry = new EntryCell
+		{
+            Placeholder = "Enter your message...",
+            VerticalTextAlignment = TextAlignment.Start,
+            Keyboard = Keyboard.Default,
+		};
+
+        sendButton = new Button
+        {
+            Text = "Send SMS",
+            BackgroundColor = Colors.White,
+            BorderColor = Colors.Black,
+            TextColor = Colors.Black,
+            BorderWidth = 1,
+            WidthRequest = 300,
+            HeightRequest = 70,
+            VerticalOptions = LayoutOptions.End,
+        };
         sendButton.Clicked += SendButton_Clicked;
 
-		phoneNumber = new Entry
-		{
-			Text = "Phone Number",
-			Keyboard = Keyboard.Telephone,
-		};
-        messageEntry = new Entry
-		{
-			Text = "Message..",
-			Keyboard = Keyboard.Default,
-		};
-		
-		Content = new VerticalStackLayout
-		{
-			Children = {
-				phoneNumber,
-				messageEntry,
-				sendButton,
-			},
+        table = new TableView
+        {
+            Root = new TableRoot
+            {
+                new TableSection
+                {
+                    phoneNumber,
+                    messageEntry
+                }
+            },
+            Intent = TableIntent.Form
+        };
+
+        Content = new VerticalStackLayout
+        {
+            Children =
+            {
+                table,
+                sendButton,
+            },
             Spacing = 10,
             Padding = 10,
             BackgroundColor = Colors.WhiteSmoke,
-            HorizontalOptions = LayoutOptions.EndAndExpand,
-            VerticalOptions = LayoutOptions.EndAndExpand,
+            HorizontalOptions = LayoutOptions.CenterAndExpand,
         };
-	}
+    }
 
     private async void SendButton_Clicked(object? sender, EventArgs e)
     {
         string number = phoneNumber.Text;
 		string message = messageEntry.Text;
-		SmsMessage sms = new SmsMessage(message, number);
 		if (number != null && Sms.Default.IsComposeSupported)
 		{
-			await Sms.Default.ComposeAsync(sms);
+            var sms = new SmsMessage(message, number);
+            await Sms.Default.ComposeAsync(sms);
 		}
     }
 }

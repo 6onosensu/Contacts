@@ -3,8 +3,10 @@
     public partial class MainPage : ContentPage
     {
         Label contactsLabel;
-        Button newMessage;
+        Button newMessage, addContact;
         ScrollView scrollView;
+        VerticalStackLayout verticalSL;
+        HorizontalStackLayout horizontalSL;
         public MainPage()
         {
             contactsLabel = new Label
@@ -16,24 +18,89 @@
                 VerticalOptions = LayoutOptions.Start,
             };
 
-            scrollView = new ScrollView
+            verticalSL = new VerticalStackLayout
             {
                 Padding = 10,
-                HorizontalOptions = LayoutOptions.Start,
+                Spacing = 40,
             };
+
+            horizontalSL = new HorizontalStackLayout
+            {
+                Spacing = 10,
+            };
+            verticalSL.Children.Add(horizontalSL);
 
             newMessage = new Button
             {
-                Text = "New Mesage",
-                BackgroundColor = Colors.WhiteSmoke,
-                BorderColor = Colors.Black,
-                TextColor = Colors.Black,
-                BorderWidth = 1,
-                WidthRequest = 300,
-                HeightRequest = 70,
+                Text = "New Message",
+                BackgroundColor = Colors.Blue,
+                TextColor = Colors.WhiteSmoke,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 22,
+                WidthRequest = 180,
+                HeightRequest = 60,
+            };
+            newMessage.Clicked += NewMessage_Clicked;
+            addContact = new Button
+            {
+                Text = "Add Contact",
+                BackgroundColor = Colors.Blue,
+                TextColor = Colors.WhiteSmoke,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 22,
+                WidthRequest = 180,
+                HeightRequest = 60,
+            };
+            addContact.Clicked += AddContact_Clicked;
+
+            horizontalSL.Children.Add(addContact);
+            horizontalSL.Children.Add(newMessage);
+
+            for (int i = 1; i <= 10; i++) 
+            {
+                var contactLayout = new HorizontalStackLayout
+                {
+                    Spacing = 10,
+                    VerticalOptions = LayoutOptions.Center,
+                };
+
+                Label contact = new Label
+                {
+                    Text = "Contact " + i,
+                    FontSize = 20,
+                    VerticalOptions = LayoutOptions.Start,
+                };
+
+                int index = i;
+                contact.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(() => OnContactTapped(index)),
+                });
+
+                var settingsIcon = new Image
+                {
+                    Source = "settings_icon.png",
+                    WidthRequest = 30,
+                    HeightRequest = 30,
+                    VerticalOptions = LayoutOptions.Center,
+                };
+
+                settingsIcon.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(() => OpenContactSettings(index)),
+                });
+
+                contactLayout.Children.Add(contact);
+                contactLayout.Children.Add(settingsIcon);
+
+                verticalSL.Children.Add(contactLayout);
             };
 
-            scrollView.AddLogicalChild(newMessage);
+            scrollView = new ScrollView
+            {
+                Content = verticalSL,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
 
             Content = new VerticalStackLayout
             {
@@ -43,6 +110,23 @@
             };
         }
 
+        private async void AddContact_Clicked(object? sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewContact());
+        }
 
+        private async void NewMessage_Clicked(object? sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewMessage());
+        }
+
+        private async void OnContactTapped(int index)
+        {
+            await Navigation.PushAsync(new ContactDetailPage(index));
+        }
+        private async void OpenContactSettings(int index)
+        {
+            await Navigation.PushAsync(new ContactSettingsPage(index));
+        }
     }
 }
