@@ -22,12 +22,12 @@ public class NewMessage : ContentPage
         sendButton = new Button
         {
             Text = "Send SMS",
-            BackgroundColor = Colors.White,
-            BorderColor = Colors.Black,
-            TextColor = Colors.Black,
-            BorderWidth = 1,
-            WidthRequest = 300,
-            HeightRequest = 70,
+            BackgroundColor = Colors.Blue,
+            TextColor = Colors.WhiteSmoke,
+            FontAttributes = FontAttributes.Bold,
+            FontSize = 22,
+            WidthRequest = 180,
+            HeightRequest = 60,
             VerticalOptions = LayoutOptions.End,
         };
         sendButton.Clicked += SendButton_Clicked;
