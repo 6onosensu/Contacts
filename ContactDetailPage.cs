@@ -1,3 +1,5 @@
+using Microsoft.Maui.ApplicationModel.Communication;
+
 namespace Contacts;
 
 public class ContactDetailPage : ContentPage
@@ -47,7 +49,7 @@ public class ContactDetailPage : ContentPage
 
         email = new Label
         {
-            Text = "Email: " + contact.Email,
+            Text = contact.Email,
             FontSize = 18,
             HorizontalOptions = LayoutOptions.Start
         };
@@ -55,7 +57,7 @@ public class ContactDetailPage : ContentPage
 
         phoneNumber = new Label
         {
-            Text = "Phone: " + contact.PhoneNumber,
+            Text = contact.PhoneNumber,
             FontSize = 18,
             HorizontalOptions = LayoutOptions.Start
         };
@@ -97,7 +99,7 @@ public class ContactDetailPage : ContentPage
             WidthRequest = 100,
             FontAttributes = FontAttributes.Bold
         };
-        emailButton.Clicked += EmailButton_Clicked; ;
+        emailButton.Clicked += EmailButton_Clicked;
 
         Button smsButton = new Button
         {
@@ -107,7 +109,7 @@ public class ContactDetailPage : ContentPage
             WidthRequest = 100,
             FontAttributes = FontAttributes.Bold
         };
-        smsButton.Clicked += SmsButton_Clicked; ;
+        smsButton.Clicked += SmsButton_Clicked;
 
         Button callButton = new Button
         {
@@ -131,13 +133,17 @@ public class ContactDetailPage : ContentPage
         
     }
 
-    private void SmsButton_Clicked(object? sender, EventArgs e)
+    private async void SmsButton_Clicked(object? sender, EventArgs e)
     {
-        
+        var _name = name.Text;
+        var phone = phoneNumber.Text;
+        await Navigation.PushAsync(new SendSmsPage(_name, phone));
     }
 
-    private void EmailButton_Clicked(object? sender, EventArgs e)
+    private async void EmailButton_Clicked(object? sender, EventArgs e)
     {
-        
+        var _name = name.Text;
+        var _email = email.Text;
+        await Navigation.PushAsync(new SendEmailPage(_name, _email));
     }
 }

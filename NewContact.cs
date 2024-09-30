@@ -2,13 +2,13 @@ namespace Contacts;
 
 public class NewContact : ContentPage
 {
+    ImageCell photo;
     EntryCell nameEntry, emailEntry, phoneEntry, addressEntry, descriptionEntry;
     public NewContact()
 	{
         Title = "Add New Contact";
         nameEntry = new EntryCell
         {
-            Label = "Name",
             Placeholder = "Enter contact name"
         };
 
@@ -44,7 +44,7 @@ public class NewContact : ContentPage
                         emailEntry,
                         phoneEntry,
                         addressEntry,
-                        descriptionEntry
+                        descriptionEntry,
                     }
                 }
         };
@@ -81,7 +81,7 @@ public class NewContact : ContentPage
         string address = addressEntry.Text;
         string description = descriptionEntry.Text;
 
-        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(phone))
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(phone))
         {
             await DisplayAlert("Error", "Name and phone number are required.", "OK");
             return;
