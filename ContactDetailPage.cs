@@ -130,7 +130,8 @@ public class ContactDetailPage : ContentPage
 
     private void CallButton_Clicked(object? sender, EventArgs e)
     {
-        
+        var _name = name.Text;
+        var phone = phoneNumber.Text;
     }
 
     private async void SmsButton_Clicked(object? sender, EventArgs e)
