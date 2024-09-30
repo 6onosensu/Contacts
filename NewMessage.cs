@@ -45,7 +45,7 @@ public class NewMessage : ContentPage
             Intent = TableIntent.Form
         };
 
-        Content = new VerticalStackLayout
+        Content = new StackLayout
         {
             Children =
             {

@@ -41,11 +41,11 @@ public partial class SendEmailPage : ContentPage
             FontSize = 22,
             WidthRequest = 180,
             HeightRequest = 60,
-            VerticalOptions = LayoutOptions.End,
+            VerticalOptions = LayoutOptions.FillAndExpand,
         };
         sendButton.Clicked += SendButton_Clicked; ;
 
-        Content = new VerticalStackLayout
+        Content = new StackLayout
         {
             Children =
             {
@@ -57,7 +57,7 @@ public partial class SendEmailPage : ContentPage
             Spacing = 10,
             Padding = 10,
             BackgroundColor = Colors.WhiteSmoke,
-            HorizontalOptions = LayoutOptions.CenterAndExpand,
+            VerticalOptions = LayoutOptions.FillAndExpand,
         };
     }
 

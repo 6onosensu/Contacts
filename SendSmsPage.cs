@@ -38,7 +38,7 @@ public class SendSmsPage : ContentPage
             FontSize = 22,
             WidthRequest = 180,
             HeightRequest = 60,
-            VerticalOptions = LayoutOptions.End,
+            VerticalOptions = LayoutOptions.FillAndExpand,
         };
         sendButton.Clicked += async (sender, args) =>
         {
@@ -50,7 +50,7 @@ public class SendSmsPage : ContentPage
             }
         };
 
-        Content = new VerticalStackLayout
+        Content = new StackLayout
         {
             Children =
             {
@@ -62,7 +62,7 @@ public class SendSmsPage : ContentPage
             Spacing = 10,
             Padding = 10,
             BackgroundColor = Colors.WhiteSmoke,
-            HorizontalOptions = LayoutOptions.CenterAndExpand,
+            VerticalOptions = LayoutOptions.FillAndExpand,
         };
     }
 }
