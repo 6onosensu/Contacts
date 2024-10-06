@@ -40,6 +40,11 @@ namespace Contacts
             }
         }
 
+        public Task<int> DeleteContact(Contact contact)
+        {
+            return _database.DeleteAsync(contact);
+        }
+
         public async Task AddSampleContacts()
         {
             var contacts = await GetContacts();
@@ -51,11 +56,6 @@ namespace Contacts
                     new Contact { Name = "Alice Smith", Photo = "dotnet_bot.png", Email = "alice@example.com", PhoneNumber = "1234567890", Address = "123 Apple St", Description = "Friend from school" },
                     new Contact { Name = "Bob Johnson", Photo = "dotnet_bot.png", Email = "bob@example.com", PhoneNumber = "2345678901", Address = "456 Orange Ave", Description = "Colleague at work" },
                     new Contact { Name = "Charlie Brown", Photo = "dotnet_bot.png", Email = "charlie@example.com", PhoneNumber = "3456789012", Address = "789 Banana Blvd", Description = "Neighbor" },
-                    //new Contact { Name = "David Wilson", Photo = "dotnet_bot.png", Email = "david@example.com", PhoneNumber = "4567890123", Address = "321 Mango Cir", Description = "Cousin" },
-                    //new Contact { Name = "Eva Taylor", Photo = "dotnet_bot.png", Email = "eva@example.com", PhoneNumber = "5678901234", Address = "654 Peach Rd", Description = "College friend" },
-                    new Contact { Name = "Frank Wright", Photo = "dotnet_bot.png", Email = "frank@example.com", PhoneNumber = "6789012345", Address = "987 Grape Ave", Description = "Gym buddy" },
-                    new Contact { Name = "Grace Lee", Photo = "dotnet_bot.png", Email = "grace@example.com", PhoneNumber = "7890123456", Address = "111 Pine St", Description = "Travel buddy" },
-                    new Contact { Name = "Helen Davis", Photo = "dotnet_bot.png", Email = "helen@example.com", PhoneNumber = "8901234567", Address = "222 Oak St", Description = "Book club member" },
                     new Contact { Name = "Ivan Moore", Photo = "dotnet_bot.png", Email = "ivan@example.com", PhoneNumber = "9012345678", Address = "333 Maple Dr", Description = "Old roommate" },
                 };
 
@@ -65,5 +65,7 @@ namespace Contacts
                 }
             }
         }
+
+
     }
 }

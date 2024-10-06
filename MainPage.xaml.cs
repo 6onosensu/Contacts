@@ -81,7 +81,6 @@ namespace Contacts
         private async void AddContact_Clicked(object? sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewContact());
-            LoadContacts();
         }
         private async void NewMessage_Clicked(object? sender, EventArgs e)
         {
@@ -104,7 +103,6 @@ namespace Contacts
                     Spacing = 10,
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
-                    //FlexAlignContent = HorizontalAlignment.Justified,
                 };
 
                 Label contactLabel = new Label
@@ -147,7 +145,7 @@ namespace Contacts
         private async void OpenContactSettings(int index)
         {
             var contact = await dbHelper.GetContactById(index);
-            await Navigation.PushAsync(new ContactSettingsPage(contact.Id));
+            await Navigation.PushAsync(new ContactSettingsPage(contact));
         }
     }
 }
