@@ -44,28 +44,5 @@ namespace Contacts
         {
             return _database.DeleteAsync(contact);
         }
-
-        public async Task AddSampleContacts()
-        {
-            var contacts = await GetContacts();
-
-            if (contacts.Count == 0)
-            {
-                var sampleContacts = new List<Contact>
-                {
-                    new Contact { Name = "Alice Smith", Photo = "dotnet_bot.png", Email = "alice@example.com", PhoneNumber = "1234567890", Address = "123 Apple St", Description = "Friend from school" },
-                    new Contact { Name = "Bob Johnson", Photo = "dotnet_bot.png", Email = "bob@example.com", PhoneNumber = "2345678901", Address = "456 Orange Ave", Description = "Colleague at work" },
-                    new Contact { Name = "Charlie Brown", Photo = "dotnet_bot.png", Email = "charlie@example.com", PhoneNumber = "3456789012", Address = "789 Banana Blvd", Description = "Neighbor" },
-                    new Contact { Name = "Ivan Moore", Photo = "dotnet_bot.png", Email = "ivan@example.com", PhoneNumber = "9012345678", Address = "333 Maple Dr", Description = "Old roommate" },
-                };
-
-                foreach (var contact in sampleContacts)
-                {
-                    await SaveContact(contact);
-                }
-            }
-        }
-
-
     }
 }

@@ -14,7 +14,7 @@ namespace Contacts
         {
             InitializeComponent();
             dbHelper = new DbHelper();
-            AddAndLoadContacts();
+            LoadContacts();
             contactsLabel = new Label
             {
                 Text = "Contacts",
@@ -85,12 +85,6 @@ namespace Contacts
         private async void NewMessage_Clicked(object? sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewMessage());
-        }
-        private async void AddAndLoadContacts()
-        {
-            await dbHelper.AddSampleContacts();
-
-            LoadContacts();
         }
         private async void LoadContacts()
         {
